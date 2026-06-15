@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网易云图床</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>网易云图床</h1>
+    <div id="user-area"></div>
+  </header>
+
+  <main>
+    <section id="login-view" hidden>
+      <div class="qr-card">
+        <p class="qr-tip">用网易云音乐 App 扫码登录</p>
+        <div id="qr-canvas-wrap"><canvas id="qr-canvas"></canvas></div>
+        <p id="qr-status" class="qr-status">加载中…</p>
+        <button id="qr-refresh" class="btn-ghost" hidden>刷新二维码</button>
+      </div>
+    </section>
+
+    <section id="app-view" hidden>
+      <div id="dropzone" class="dropzone">
+        <p>拖拽 / 点击选择 / Ctrl+V 粘贴图片</p>
+        <input type="file" id="file-input" accept="image/*" multiple hidden>
+      </div>
+      <ul id="upload-list" class="upload-list"></ul>
+
+      <h2 class="section-title">历史记录</h2>
+      <div class="format-switch">
+        <label>复制格式：</label>
+        <select id="format-select">
+          <option value="url">直链</option>
+          <option value="markdown">Markdown</option>
+          <option value="html">HTML</option>
+          <option value="thumb">缩略图 200y200</option>
+        </select>
+      </div>
+      <div id="history-grid" class="history-grid"></div>
+    </section>
+  </main>
+
+  <script src="qrcode.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
