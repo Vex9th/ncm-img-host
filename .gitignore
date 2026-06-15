@@ -2,3 +2,4 @@ images_clean.sql
 node_modules/
 .scratch/
 .wrangler/
+.claude/
