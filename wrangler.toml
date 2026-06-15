@@ -1,4 +1,8 @@
-name = "netease-img-host"
-pages_build_output_dir = "public"
+name = "ncm-img-host"
+main = "src/index.js"
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
