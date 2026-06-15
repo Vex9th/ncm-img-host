@@ -5,6 +5,6 @@
   "private": true,
   "scripts": {
     "test": "node --test",
-    "dev": "wrangler pages dev public"
+    "dev": "wrangler dev"
   }
 }

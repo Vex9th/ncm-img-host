@@ -1,25 +1,24 @@
 # 网易云图床
 
-基于 Cloudflare Pages + Pages Functions 的无状态网易云图床。纯静态前端 + 同源 API 代理，**不存储任何用户凭证**。
+基于 Cloudflare Workers + 静态资源（Static Assets）的无状态网易云图床。纯静态前端 + 同源 API 代理，**不存储任何用户凭证**。
 
-## 部署
+> 架构说明：`public/` 是静态前端，`src/index.js` 是 Worker 入口，按路径把 `/api/*` 分发到 `functions/api/**` 下的处理逻辑，其余请求交给静态资源。配置见 `wrangler.toml`（`main` + `[assets]` + `nodejs_compat`）。
+
+## 部署（Cloudflare Workers Builds）
 
 1. Fork 本仓库到你的 GitHub。
-2. Cloudflare Dashboard → Workers & Pages → 创建 → Pages → 连接到 Git，选择该仓库。
-3. 构建设置：
-   - 构建命令：**留空**
-   - 构建输出目录：`public`
-4. 设置 → 函数 / 兼容性：
-   - 兼容性标志（Compatibility flags）添加：`nodejs_compat`
-   - 兼容性日期（Compatibility date）：设为较新日期（如 `2024-11-01`）
-   > 也可由仓库内 `wrangler.toml` 自动带入。
-5. 保存并部署。访问分配的 `*.pages.dev` 域名。
+2. Cloudflare Dashboard → Workers & Pages → 创建 → **导入仓库（Import a repository）**，选择该仓库。
+3. 部署命令保持默认：`npx wrangler deploy`（仓库内 `wrangler.toml` 已声明 `main`、`[assets]` 与 `nodejs_compat`，无需在面板额外配置输出目录）。
+4. “路径”保持 `/`（仓库根目录）。
+5. 保存并部署。访问分配的 `*.workers.dev` 域名。
+
+> 若你的账号仍提供独立的 **Pages → 连接到 Git** 流程，本项目也兼容：构建命令留空、构建输出目录 `public`、开启 `nodejs_compat`（此时按 Pages Functions 约定运行 `functions/` 目录，无需用到 `src/index.js`）。
 
 ## 本地开发
 
 ```bash
 npm install -g wrangler   # 或 npx
-npm run dev               # = wrangler pages dev public
+npm run dev               # = wrangler dev（Worker + 静态资源）
 npm test                  # 运行加密/工具单测
 ```
 
