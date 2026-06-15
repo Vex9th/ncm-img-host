@@ -1,0 +1,76 @@
+:root {
+  --bg: #14161a; --surface: #1d2026; --surface-2: #262a32;
+  --text: #e6e8eb; --muted: #9aa0a8; --accent: #c20c0c; --border: #2e333c;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--surface);
+}
+.topbar h1 { font-size: 18px; margin: 0; }
+main { max-width: 900px; margin: 0 auto; padding: 24px; }
+.btn-ghost, button {
+  cursor: pointer; border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text); border-radius: 8px; padding: 6px 12px; font-size: 14px;
+}
+button:hover { border-color: var(--accent); }
+
+/* 登录 */
+.qr-card {
+  margin: 48px auto; max-width: 320px; text-align: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+}
+#qr-canvas-wrap { background: #fff; display: inline-block; padding: 12px; border-radius: 8px; }
+.qr-tip { color: var(--muted); }
+.qr-status { margin-top: 14px; font-size: 14px; }
+
+/* 用户区 */
+#user-area { display: flex; align-items: center; gap: 10px; }
+#user-area img { width: 32px; height: 32px; border-radius: 50%; }
+
+/* 上传区 */
+.dropzone {
+  border: 2px dashed var(--border); border-radius: var(--radius);
+  padding: 48px; text-align: center; color: var(--muted); cursor: pointer;
+  transition: border-color .15s;
+}
+.dropzone.dragover { border-color: var(--accent); color: var(--text); }
+.upload-list { list-style: none; padding: 0; margin: 20px 0; }
+.upload-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+}
+.upload-item .name { flex: 1; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.progress { width: 120px; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.progress > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+/* 历史瀑布流 */
+.section-title { font-size: 16px; margin-top: 32px; }
+.format-switch { margin: 10px 0; color: var(--muted); }
+.format-switch select { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; }
+.history-grid { column-count: 4; column-gap: 12px; }
+@media (max-width: 700px) { .history-grid { column-count: 2; } }
+.history-card {
+  break-inside: avoid; margin-bottom: 12px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden; position: relative;
+}
+.history-card img { width: 100%; display: block; }
+.history-card .actions {
+  display: flex; gap: 6px; padding: 8px; opacity: 0; transition: opacity .15s;
+  position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,.6);
+}
+.history-card:hover .actions { opacity: 1; }
+.history-card .actions button { flex: 1; font-size: 12px; padding: 4px; }
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--surface-2); border: 1px solid var(--border);
+  padding: 10px 18px; border-radius: 8px; opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.toast.show { opacity: 1; }
